@@ -39,9 +39,6 @@ jobs:
       - name: Download Wiz CLI
         run: curl -o wizcli https://downloads.wiz.io/wizcli/latest/wizcli-linux-amd64 && chmod +x wizcli
 
-      - name: Check Wiz CLI version
-        run: ./wizcli --version
-
       - name: Authenticate to Wiz
         run: ./wizcli auth --id "$WIZ_CLIENT_ID" --secret "$WIZ_CLIENT_SECRET"
         env:
@@ -54,5 +51,5 @@ jobs:
       - name: Terraform Apply (always)
         run: terraform apply -auto-approve tfplan
 
-#Ignoreme: This workflow is designed to run on every push to the main branch and on pull requests.
-#Hi
+# Ignoreme: This workflow is designed to run on every push to the main branch and on pull requests.
+# Hi
