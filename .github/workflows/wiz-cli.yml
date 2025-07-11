@@ -45,7 +45,7 @@ jobs:
           WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
 
       - name: Run Wiz CLI IaC scan with tfplan
-        run: ./wizcli iac scan --path $SCAN_PATH --plan tfplan --policy "$POLICY"
+        run: ./wizcli iac scan --path $SCAN_PATH --policy "$POLICY"
 
       - name: Terraform Apply (always)
         run: terraform apply -auto-approve tfplan
