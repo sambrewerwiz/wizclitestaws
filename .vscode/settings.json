@@ -1,0 +1,45 @@
+{
+    "wiz.codePolicies.vulnerabilities": [
+        "Default vulnerabilities policy",
+        "sambrewervuln",
+        "SamBrewerVuln"
+    ],
+    "wiz.codePolicies.secrets": [
+        "Default secrets policy"
+    ],
+    "wiz.codePolicies.IAC Configuration": [
+        "aaronlake-iac-policy",
+        "ac-demo-policy-ian",
+        "afd-default-iac",
+        "aklaas Default IaC policy",
+        "alon-jupiter-ac-test",
+        "amir testing policy1",
+        "andrew-konrath-IaC-Policy",
+        "andy-stenger-argocd-iac-policy",
+        "an-s3-bucket-versioning-demo",
+        "Ben-Bryant-Misconfig",
+        "betal-iac-ado-scan",
+        "Better Terraform Providers",
+        "Block High IaC Findings [A.McKenzie]",
+        "block-iac-fail-medium",
+        "Blocking IaC policy [Iman]",
+        "chris-wang-se-iac",
+        "Cody IaC policy",
+        "Cristian IaC policy",
+        "CSmith-Hyperscaler-IAC",
+        "dbaker-ac-20240320-v2",
+        "deanm IaC policy",
+        "Default IaC policy",
+        "derek-christensen-iac-policy",
+        "dk-misconfigurations",
+        "Isaac_iac_block",
+        "isaac_iac_test",
+        "Isaac_Test_IaC_Policy",
+        "isv-code-iac",
+        "Jared-Yanna-Proj-IaC",
+        "Jbrennan iac",
+        "jcourtial-test-global",
+        "SamBrewerIaC",
+        "SamBrewerTestIaC"
+    ]
+}
