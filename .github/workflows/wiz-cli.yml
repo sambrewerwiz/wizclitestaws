@@ -1,0 +1,52 @@
+name: "wiz-cli"
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  wiz-cli-iac-scan-and-apply:
+    name: "Wiz CLI Terraform Scan + Apply"
+    runs-on: ubuntu-latest
+
+    env:
+      SCAN_PATH: "."
+      POLICY: "SamBrewerIaC"
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.0
+
+      - name: Terraform Init and Plan
+        run: |
+          terraform init
+          terraform plan -out=tfplan
+
+      - name: Download Wiz CLI
+        run: curl -o wizcli https://downloads.wiz.io/wizcli/latest/wizcli-linux-amd64 && chmod +x wizcli
+
+      - name: Authenticate to Wiz
+        run: ./wizcli auth --id "$WIZ_CLIENT_ID" --secret "$WIZ_CLIENT_SECRET"
+        env:
+          WIZ_CLIENT_ID: ${{ secrets.WIZ_CLIENT_ID }}
+          WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
+
+      - name: Run Wiz CLI IaC scan with tfplan
+        run: ./wizcli iac scan --path $SCAN_PATH --plan tfplan --policy "$POLICY"
+
+      - name: Terraform Apply (always)
+        run: terraform apply -auto-approve tfplan
+
