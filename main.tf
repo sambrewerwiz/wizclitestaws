@@ -1,5 +1,6 @@
 provider "azurerm" {
   features {}
+  subscription_id = "57538909-fbd0-4e2b-989d-c15c8a4d5303"
 }
 
 resource "azurerm_resource_group" "rg" {
@@ -49,7 +50,10 @@ resource "azurerm_network_interface" "nic" {
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
   }
+}
 
+resource "azurerm_network_interface_security_group_association" "nic_nsg" {
+  network_interface_id      = azurerm_network_interface.nic.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
@@ -78,9 +82,9 @@ resource "azurerm_linux_virtual_machine" "vm" {
   }
 
   admin_ssh_key {
-    username   = "azureuser"
-    public_key = file("~/.ssh/id_rsa.pub")
-  }
+  username   = "azureuser"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSLuWuBSsQF5Izo+WqT+Vyb0LNU1Ql9mUlsOuIHnDvnYlkW7ru9R3fbAUGMS0OV+PssLSmA6+cUsNn9sI8YE551cBkj5voz6Ya6VeknrX17hhbKrzQ1HVVHYvHnPmlhPS28hkcQDj2aytQNYFhrrsNezha0GaLXfEzVZHejBFhNBJS1WHs+SSY7nWFL41X1Rmob6rqB+UQ++FDw9w4dHfjFbq91CNQjuGuc5K+ecZ9fLuFbimWcy6UuHP6ldz5PSeRWpJMU7JWqZF8fPMTb+bD5FvgOHZlo1IlkouBE97S1Mvm+3NPPiURyWoJlS1TjN9ZlcSi9fRCZgQ/Ca81rz4h sam.brewer@M4DF7W7FR7"
+}
 
   disable_password_authentication = true
 }
